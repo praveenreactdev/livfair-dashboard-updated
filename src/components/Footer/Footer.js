@@ -30,13 +30,10 @@ class Footer extends React.Component {
         <Container fluid>
           <Nav>
             <NavItem>
-              <NavLink href="https://www.creative-tim.com/?ref=bdr-user-archive-footer">Creative Tim</NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink href="https://www.creative-tim.com/presentation?ref=bdr-user-archive-footer">About Us</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://www.creative-tim.com/blog?ref=bdr-user-archive-footer">Blog</NavLink>
+              <NavLink href="https://www.creative-tim.com/blog?ref=bdr-user-archive-footer">Contact Us</NavLink>
             </NavItem>
           </Nav>
           <div className="copyright">
@@ -46,9 +43,9 @@ class Footer extends React.Component {
               href="https://www.creative-tim.com/?ref=bdr-user-archive-footer"
               target="_blank"
             >
-              Creative Tim
+              Techfully
             </a>{" "}
-            for a better web.
+            for rapid virtual events.
           </div>
         </Container>
       </footer>

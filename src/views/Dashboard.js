@@ -72,8 +72,8 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <Row>
                     <Col className="text-left" sm="6">
-                      <h5 className="card-category">Total Shipments</h5>
-                      <CardTitle tag="h2">Performance</CardTitle>
+                      <h5 className="card-category">Total Users</h5>
+                      <CardTitle tag="h2">Logged In Users</CardTitle>
                     </Col>
                     <Col sm="6">
                       <ButtonGroup
