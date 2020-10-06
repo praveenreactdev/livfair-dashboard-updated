@@ -1,17 +1,30 @@
-import React from 'react'
+import React ,{Fragment} from 'react'
 import { Field,FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
+import { Input, FormFeedback, FormText } from 'reactstrap';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ input, label, type,custom,warning, meta: { touched, error } }) => (
   <div style={{marginBottom:'4px'}}>
-    {/* <label>{label}</label> */}
-    <div>
+    <label>{label}</label>
+    {/* <div>
       <input {...input} type={type} placeholder={label} style={{width:'100%',borderRadius:'4px',border:'0.5px solid grey',height:'40px'}} />
       {touched && error && <span>{error}</span>}         
-    </div>
+    </div> */}
+    <Fragment>
+        <Input {...(touched ? { valid: !error } : {})} {...input} {...custom} />
+        {error && <FormFeedback>{error}</FormFeedback>}
+        {!error && warning && <FormText>{warning}</FormText>}
+    </Fragment>
   </div>
 );
-
+const renderSelectField = ({ input,label, meta: { touched, error }, children, ...custom }) => (
+  <div>
+    <label>{label}</label>
+  <Input type="select" {...(touched ? { valid: !error } : {})} {...input} {...custom}>
+      {children}
+  </Input>
+  </div>
+);
 const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
   <ul style={{listStyle:'none',padding:'0px'}}>
     <li>
@@ -46,7 +59,7 @@ const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
         /> */}
          <div style={{marginBottom:"4px"}}>
         <div >
-          <Field label="Type" name={`${media}.type`} component="select" style={{width:'100%',borderRadius:'4px',border:'0.5px solid grey',height:'40px'}}>
+          <Field label="Type" name={`${media}.type`} component={renderSelectField} style={{width:'100%',borderRadius:'4px',border:'0.5px solid grey',height:'40px'}}>
             <option value="Choose">Choose</option>
             <option value="Banner">Banner</option>
             <option value="Option2">Option2</option>
