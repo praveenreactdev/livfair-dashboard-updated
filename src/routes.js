@@ -23,7 +23,8 @@ import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
-
+import EventConfigForm from "components/EventConfiguration/EventConfigForm"
+import ManageEvents from "components/EventConfiguration/ManageEvents"
 var routes = [
   {
     path: "/dashboard",
@@ -39,6 +40,22 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-atom",
     component: Icons,
+    layout: "/admin"
+  },
+  {
+    path: "/create-event",
+    name: "Create Event",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-notes",
+    component: EventConfigForm,
+    layout: "/admin"
+  },
+  {
+    path: "/manage-event",
+    name: "Manage Events",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-notes",
+    component: ManageEvents,
     layout: "/admin"
   }
 ];
