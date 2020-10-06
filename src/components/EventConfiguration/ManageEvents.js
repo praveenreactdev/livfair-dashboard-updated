@@ -94,7 +94,10 @@ class ManageEvents extends React.Component {
                                                     <DropdownMenu aria-labelledby="dropdownMenuLink" right>
                                                     <DropdownItem
                                                         href="#pablo"
-                                                        onClick={e => {e.preventDefault()}}
+                                                        onClick={e => {e.preventDefault();
+                                                            this.props.history.push(`/admin/exhibitors-list/${d.eventId}`) 
+                                                        
+                                                        }}
                                                     >
                                                         Edit Event
                                                     </DropdownItem>

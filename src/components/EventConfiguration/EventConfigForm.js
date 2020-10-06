@@ -3,6 +3,9 @@ import { Field,FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 import { Input, FormFeedback, FormText,Button } from 'reactstrap';
 
+const required = value => value ? undefined : 'Required'
+
+
 const renderField = ({ input, label, type,custom,warning, meta: { touched, error } }) => (
   <div style={{marginBottom:'4px'}}>
     <label>{label}</label>
@@ -143,6 +146,7 @@ const EventConfigForm = props => {
         type="text"
         component={renderField}
         label="Event Name"
+        validate={[required]}
       />
       <Field
         name="eventId"

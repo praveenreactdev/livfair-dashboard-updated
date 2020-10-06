@@ -79,6 +79,16 @@ export const configureEvent = (values) => (dispatch)=>{
   
 }
 
+export const loadExhibitors = (eventId) => (dispatch)=> {
+    fetch(config.eventConfigurationBaseURL+'getExhibitors'+'/'+eventId).then(data=>data.json()).then(response=>{
+        let {exhibitors} = response;
+        dispatch({
+          payload:{exhibitors},
+          type:'LOAD_EXHIBITORS'
+        })
+      })
+}
+
 export const loadAdminDashboard = (values) => (dispatch) => {
   axios
     .get(config.apiRootPath + config.loadAdminDashboard, {

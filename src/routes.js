@@ -25,6 +25,7 @@ import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
 import EventConfigForm from "components/EventConfiguration/EventConfigForm"
 import ManageEvents from "components/EventConfiguration/ManageEvents"
+import ExhibitorsList from 'components/EventConfiguration/ExhibitorsList'
 var routes = [
   {
     path: "/dashboard",
@@ -48,6 +49,14 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-notes",
     component: ManageEvents,
+    layout: "/admin"
+  },
+  {
+    path: "/exhibitors-list/:eventId",
+    name: "Exhibitors List",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-notes",
+    component: ExhibitorsList,
     layout: "/admin"
   }
 ];

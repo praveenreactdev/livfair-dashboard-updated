@@ -21,6 +21,9 @@ export default function (state = initialState, action) {
       case 'CONFIGURE_EVENT' :{
        return  {...state,initialValues:action.payload.event,exhibitors:action.payload.exhibitors}
       }
+      case 'LOAD_EXHIBITORS': {
+        return {...state,exhibitors:action.payload.exhibitors}
+      }
         
       default:
         return state;
