@@ -1,7 +1,7 @@
 import React ,{Fragment} from 'react'
 import { Field,FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
-import { Input, FormFeedback, FormText } from 'reactstrap';
+import { Input, FormFeedback, FormText,Button } from 'reactstrap';
 
 const renderField = ({ input, label, type,custom,warning, meta: { touched, error } }) => (
   <div style={{marginBottom:'4px'}}>
@@ -28,7 +28,10 @@ const renderSelectField = ({ input,label, meta: { touched, error }, children, ..
 const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
   <ul style={{listStyle:'none',padding:'0px'}}>
     <li>
-      <button type="button" className="add-button" onClick={() => fields.push({})}>Add Media</button>
+      {/* <button type="button" className="add-button" onClick={() => fields.push({})}>Add Media</button> */}
+      <Button color="info" className="btn-round" size="sm" onClick={() => fields.push({})}>
+        Add Media
+      </Button>
       {(touched || submitFailed) && error && <span>{error}</span>}
     </li>
     {fields.map((media, index) => (
@@ -80,7 +83,10 @@ const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
 const renderSpotlight = ({ fields, meta: { touched, error, submitFailed } }) => (
   <ul style={{listStyle:'none',padding:'0px'}}>
     <li>
-      <button type="button" className="add-button" onClick={() => fields.push({})}>Add Spotlight</button>
+      {/* <button type="button" className="add-button" onClick={() => fields.push({})}>Add Spotlight</button> */}
+      <Button color="info" className="btn-round" size="sm" onClick={() => fields.push({})}>
+        Add Spotlight
+      </Button>
       {(touched || submitFailed) && error && <span>{error}</span>}
     </li>
     {fields.map((media, index) => (
@@ -183,12 +189,24 @@ const EventConfigForm = props => {
       <FieldArray name="metadata.media" component={renderMedia}/>
       <FieldArray name="activities.spotlight" component={renderSpotlight}/>
       <div>
-        <button type="submit" disabled={pristine || submitting}>
+      <Button className="btn-fill" color="primary" type="submit" disabled={pristine || submitting}>
+                    Submit
+      </Button>
+        {/* <button type="submit" disabled={pristine || submitting}>
           Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
+        </button> */}
+        {/* <button type="button" disabled={pristine || submitting} onClick={reset}>
          Reset
-        </button>
+        </button> */}
+        <Button
+                            className="btn-fill"
+                            color="success"
+                            color="primary"
+                            id="tooltip324367706"
+                            disabled={pristine || submitting} onClick={reset}
+                          >
+                            <i className="tim-icons icon-refresh-01" />
+                          </Button>
       </div>
     </form>
   
