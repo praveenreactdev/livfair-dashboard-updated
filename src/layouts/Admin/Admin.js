@@ -84,6 +84,7 @@ class Admin extends React.Component {
           <Route
             path={prop.layout + prop.path}
             component={prop.component}
+            exact={prop.exact}
             key={key}
           />
         );
@@ -107,13 +108,18 @@ class Admin extends React.Component {
     }
     return "Brand";
   };
+
+
+  getActualRoutes = ()=>{
+   return routes.filter(x=>x.sideNav)
+  }
   render() {
     return (
       <>
         <div className="wrapper">
           <Sidebar
             {...this.props}
-            routes={routes}
+            routes={this.getActualRoutes()}
             bgColor={this.state.backgroundColor}
             logo={{
               outterLink: "https://www.creative-tim.com/",

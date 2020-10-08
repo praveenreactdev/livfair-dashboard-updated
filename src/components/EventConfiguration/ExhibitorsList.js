@@ -40,7 +40,9 @@ class ExhibitorsList extends Component {
                     <Col md="12">
               <Card>
                 <CardHeader>
-                  
+                  <div className="tools float-right">
+                        <Button color="info" onClick={()=>{this.props.history.push('/admin/create-exhibitor')}}>Add</Button>
+                  </div>
         <CardTitle tag="h4">{`Exhibitors List`}</CardTitle>
                 </CardHeader>
                 <CardBody>

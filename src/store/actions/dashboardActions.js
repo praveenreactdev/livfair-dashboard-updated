@@ -107,3 +107,41 @@ export const loadAdminDashboard = (values) => (dispatch) => {
       }
     });
 };
+
+export const createEvent = (values) => (dispatch) =>{
+  console.log(values)
+  axios.post(config.eventConfigurationBaseURL+'createEvent',values,{headers:{
+    'Content-Type':'application/json'
+  }}).then(res=>{
+    let response = res.data;
+    let {status,code} = response;
+    if(code != "200"){
+      dispatch({
+        type:'CREATE_EVENT_FAILED',
+        payload:{}
+      })
+    }else{
+      dispatch({
+        type:'CREATE_EVENT_SUCCESS',
+        payload:{}
+      })
+    }
+  })
+}
+
+export const deleteEvent = (payload) =>dispatch =>{
+  axios.post(config.eventConfigurationBaseURL+'deleteEvent',payload,{headers:{
+    'Content-Type':'application/json'
+  }}).then(res=>{
+    let response = res.data;
+    let {status,code} = response;
+    if(code != "200"){
+      dispatch({
+        type:'LOAD_EVENTS_FAILURE',
+        payload:{}
+      })
+    }else{
+     dispatch(loadEvents(payload))
+    }
+  })
+}

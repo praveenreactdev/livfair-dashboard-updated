@@ -1,14 +1,14 @@
 /* Form controls */
 @include form-control-placeholder(#6c757c, 1);
 
-.form-control{
+.form-control {
   border-color: lighten($black,5%);
   border-radius: $border-radius-lg;
   font-size: $font-size-sm;
   @include transition-input-focus-color();
 
 
-  &:focus{
+  &:focus {
     border-color: $primary;
     background-color: $input-bg;
     @include box-shadow(none);
@@ -16,7 +16,7 @@
     & + .input-group-append .input-group-text,
     & ~ .input-group-append .input-group-text,
     & + .input-group-prepend .input-group-text,
-    & ~ .input-group-prepend .input-group-text{
+    & ~ .input-group-prepend .input-group-text {
         border: 1px solid $primary;
         border-left: none;
         background-color: $transparent-bg;
@@ -26,19 +26,19 @@
   .has-success &,
   .has-error &,
   .has-success &:focus,
-  .has-error &:focus{
+  .has-error &:focus {
       @include box-shadow(none);
   }
 
   .has-danger &,
-  .has-success &{
+  .has-success & {
       &.form-control-success,
-      &.form-control-danger{
+      &.form-control-danger {
           background-image: none;
       }
   }
 
-  & + .form-control-feedback{
+  & + .form-control-feedback {
       border-radius: $border-radius-lg;
       margin-top: -7px;
       position: absolute;
@@ -47,13 +47,13 @@
       vertical-align: middle;
   }
 
-  .open &{
+  .open & {
       border-radius: $border-radius-lg $border-radius-lg 0 0;
       border-bottom-color: $transparent-bg;
   }
 
   & + .input-group-append .input-group-text,
-  & + .input-group-prepend .input-group-text{
+  & + .input-group-prepend .input-group-text {
       background-color: $white;
   }
 
@@ -61,13 +61,13 @@
 
 .has-success .input-group-append .input-group-text,
 .has-success .input-group-prepend .input-group-text,
-.has-success .form-control{
+.has-success .form-control {
     border-color: lighten($black,5%);
 }
 
 .has-success .form-control:focus,
 .has-success.input-group-focus .input-group-append .input-group-text,
-.has-success.input-group-focus .input-group-prepend .input-group-text{
+.has-success.input-group-focus .input-group-prepend .input-group-text {
   border-color: darken($success, 10%);
 }
 
@@ -75,19 +75,19 @@
 .has-danger .input-group-append .input-group-text,
 .has-danger .input-group-prepend .input-group-text,
 .has-danger.input-group-focus .input-group-prepend .input-group-text,
-.has-danger.input-group-focus .input-group-append .input-group-text{
+.has-danger.input-group-focus .input-group-append .input-group-text {
     border-color: lighten($danger-states,5%);
     color: $danger-states;
     background-color: rgba(222,222,222, .1);
 
-    &:focus{
+    &:focus {
         background-color: $transparent-bg;
     }
 }
 
 .has-success,
-.has-danger{
-    &:after{
+.has-danger {
+    &:after {
         font-family: 'nucleo';
         content: "\ea1b";
         display: inline-block;
@@ -98,21 +98,21 @@
         font-size: 11px;
     }
 
-    &.form-control-lg{
-      &:after{
+    &.form-control-lg {
+      &:after {
         font-size: 13px;
         top: 24px;
       }
     }
 
-    &.has-label{
+    &.has-label {
       &:after{
         top: 37px;
       }
     }
 
 
-    &.form-check:after{
+    &.form-check:after {
       display: none !important;
     }
 
@@ -121,13 +121,31 @@
     }
 }
 
-.has-danger{
+.has-danger {
   &:after{
     content: "\ea48";
     color: $danger-states;
   }
 
-  &.form-check .form-check-label{
+  &.form-check .form-check-label {
     color: $danger-states;
+  }
+
+  &.input-group-focus {
+    .input-group-text {
+      border-color: #ec250d !important;
+    }
+  }
+}
+
+
+@include media-breakpoint-down(xs) {
+  .form-horizontal .col-form-label,
+  .form-horizontal .label-on-right {
+    text-align: inherit;
+    padding-top: 0;
+    code {
+      padding: 0 10px;
+    }
   }
 }

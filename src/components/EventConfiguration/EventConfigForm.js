@@ -1,8 +1,10 @@
 import React ,{Fragment} from 'react'
 import { Field,FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
-import { Input, FormFeedback, FormText,Button } from 'reactstrap';
-
+import { Input, FormFeedback, FormText,Button, FormGroup} from 'reactstrap';
+import ReactDatetime from "react-datetime";
+import { Redirect } from 'react-router-dom';
+import {createEvent} from '../../store/actions/dashboardActions'
 const required = value => value ? undefined : 'Required'
 
 
@@ -28,6 +30,24 @@ const renderSelectField = ({ input,label, meta: { touched, error }, children, ..
   </Input>
   </div>
 );
+
+const renderDateField = ({input,label,meta:{touched,error},children,...custom}) =>(
+  <div>
+    <label>{label}</label>
+    <FormGroup>
+    <ReactDatetime
+                      inputProps={{
+                        className: "form-control",
+                       
+                      }}
+                      timeFormat={false}
+                    />
+
+    </FormGroup>
+    
+  </div>
+)
+
 const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
   <ul style={{listStyle:'none',padding:'0px'}}>
     <li>
@@ -136,11 +156,15 @@ const renderSpotlight = ({ fields, meta: { touched, error, submitFailed } }) => 
 );
 
 const EventConfigForm = props => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit, pristine, reset, submitting,createEventAction,dashboard:{eventCreationStatus} } = props
+  console.log(eventCreationStatus)
   return (
     <>
+    {
+      eventCreationStatus ? (<Redirect to="/admin/manage-event"/>) :('')
+    }
     <div className="content">
-    <form onSubmit={handleSubmit(val=>console.log(val))}>
+    <form onSubmit={handleSubmit(val=>{createEventAction(val)})}>
       <Field
         name="name"
         type="text"
@@ -160,6 +184,11 @@ const EventConfigForm = props => {
         component={renderField}
         label="Event Type"
       />
+      {/* <Field
+      name="startDate"
+      component={renderDateField}
+      label="Start Date"
+      /> */}
       <Field
         name="description"
         type="text"
@@ -190,18 +219,14 @@ const EventConfigForm = props => {
         component={renderField}
         label="No of Booths"
       />
+
       <FieldArray name="metadata.media" component={renderMedia}/>
       <FieldArray name="activities.spotlight" component={renderSpotlight}/>
       <div>
       <Button className="btn-fill" color="primary" type="submit" disabled={pristine || submitting}>
                     Submit
       </Button>
-        {/* <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button> */}
-        {/* <button type="button" disabled={pristine || submitting} onClick={reset}>
-         Reset
-        </button> */}
+
         <Button
                             className="btn-fill"
                             color="success"
@@ -228,4 +253,4 @@ const eventForm = reduxForm({
   enableReinitialize:true
 })(EventConfigForm)
 
-export default connect((state)=>{return {}},{})(eventForm)
+export default connect((state)=>{return {dashboard:state.dashboard}},{createEventAction:createEvent})(eventForm)

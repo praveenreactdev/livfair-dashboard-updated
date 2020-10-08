@@ -26,6 +26,7 @@ import UserProfile from "views/UserProfile.js";
 import EventConfigForm from "components/EventConfiguration/EventConfigForm"
 import ManageEvents from "components/EventConfiguration/ManageEvents"
 import ExhibitorsList from 'components/EventConfiguration/ExhibitorsList'
+import CreateExhibitor from 'components/EventConfiguration/CreateExhibitor'
 var routes = [
   {
     path: "/dashboard",
@@ -33,7 +34,8 @@ var routes = [
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: Dashboard,
-    layout: "/admin"
+    layout: "/admin",
+    sideNav:true
   },
   {
     path: "/create-event",
@@ -41,7 +43,9 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-notes",
     component: EventConfigForm,
-    layout: "/admin"
+    layout: "/admin",
+    sideNav:false
+
   },
   {
     path: "/manage-event",
@@ -49,7 +53,9 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-notes",
     component: ManageEvents,
-    layout: "/admin"
+    layout: "/admin",
+    sideNav:true
+
   },
   {
     path: "/exhibitors-list/:eventId",
@@ -57,7 +63,18 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-notes",
     component: ExhibitorsList,
-    layout: "/admin"
+    layout: "/admin",
+    sideNav:false
+
+  },
+  {
+    path: "/create-exhibitor",
+    name: "Create Exhibitor",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-notes",
+    component: CreateExhibitor,
+    layout: "/admin",
+    sideNav:false
   }
 ];
 export default routes;

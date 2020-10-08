@@ -1,14 +1,12 @@
+/*!
 
-/*
  =========================================================
- * Black Dashboard React v1.1.0 based on Black Dashboard - v1.1.0
+ * Black Dashboard Pro - v1.1.1
  =========================================================
 
- * Product Page: https://www.creative-tim.com/product/black-dashboard-react
- * Copyright 2020 Creative Tim (https://www.creative-tim.com)
- * Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
+ * Product Page: https://themes.getbootstrap.com/product/black-dashboard-pro-premium-bootstrap-4-admin/
+ * Copyright 2020 Creative Tim (http://www.creative-tim.com)
 
- * Coded by Creative Tim
 
  =========================================================
 
@@ -64,15 +62,31 @@
 
  // Custom components
 
+ @import "black-dashboard-react/custom/reboot.scss";
+ @import "black-dashboard-react/custom/global.scss";
+ @import "black-dashboard-react/custom/utilities.scss";
  @import "black-dashboard-react/custom/alerts.scss";
- @import "black-dashboard-react/custom/badges.scss";
+ @import "black-dashboard-react/custom/avatars.scss";
+ @import "black-dashboard-react/custom/badge.scss";
  @import "black-dashboard-react/custom/buttons.scss";
+ @import "black-dashboard-react/custom/close.scss";
+ @import "black-dashboard-react/custom/custom-forms.scss";
  @import "black-dashboard-react/custom/dropdown.scss";
  @import "black-dashboard-react/custom/footer.scss";
  @import "black-dashboard-react/custom/forms.scss";
+ @import "black-dashboard-react/custom/grid.scss";
+ @import "black-dashboard-react/custom/icons.scss";
  @import "black-dashboard-react/custom/images.scss";
+ @import "black-dashboard-react/custom/input-group.scss";
+ @import "black-dashboard-react/custom/info-areas.scss";
  @import "black-dashboard-react/custom/modal.scss";
+ @import "black-dashboard-react/custom/nav.scss";
  @import "black-dashboard-react/custom/navbar.scss";
+ @import "black-dashboard-react/custom/pagination.scss";
+ @import "black-dashboard-react/custom/tabs.scss";
+ @import "black-dashboard-react/custom/pills.scss";
+ @import "black-dashboard-react/custom/popover.scss";
+ @import "black-dashboard-react/custom/progress.scss";
  @import "black-dashboard-react/custom/type.scss";
  @import "black-dashboard-react/custom/tables";
  @import "black-dashboard-react/custom/checkboxes-radio";
@@ -80,13 +94,28 @@
  @import "black-dashboard-react/custom/sidebar-and-main-panel.scss";
  @import "black-dashboard-react/custom/misc.scss";
  @import "black-dashboard-react/custom/rtl.scss";
- @import "black-dashboard-react/custom/input-group.scss";
-
+ @import "black-dashboard-react/custom/timeline.scss";
 
  // Vendor / Plugins
 
+@import "black-dashboard-react/custom/vendor/plugin-datetimepicker.scss";
+@import "black-dashboard-react/custom/vendor/plugin-nouislider.scss";
+@import "black-dashboard-react/custom/vendor/plugin-fullcalendar.scss";
+@import "black-dashboard-react/custom/vendor/plugin-sweetalert2.scss";
+@import "black-dashboard-react/custom/vendor/plugin-bootstrap-switch.scss";
+@import "black-dashboard-react/custom/vendor/plugin-bootstrap-select.scss";
+@import "black-dashboard-react/custom/vendor/plugin-jasny-fileupload.scss";
+@import "black-dashboard-react/custom/vendor/plugin-tagsinput.scss";
 @import "black-dashboard-react/custom/vendor/plugin-perfect-scrollbar.scss";
-@import "black-dashboard-react/custom/vendor/plugin-react-notification-alert.scss";
+@import "black-dashboard-react/custom/vendor/plugin-jquery.jvectormap.scss";
+@import "black-dashboard-react/custom/vendor/plugin-datatables.net.scss";
+@import "black-dashboard-react/custom/vendor/plugin-animate-bootstrap-notify.scss";
+@import "black-dashboard-react/custom/vendor/plugin-card-wizard.scss";
+@import "black-dashboard-react/custom/vendor/plugin-chartjs.scss";
+
+// example pages and sections
+
+@import "black-dashboard-react/custom/example-pages.scss";
 
 // light mode
 
@@ -99,7 +128,18 @@
 @import "black-dashboard-react/custom/cards/card-map";
 @import "black-dashboard-react/custom/cards/card-user";
 @import "black-dashboard-react/custom/cards/card-task";
+@import "black-dashboard-react/custom/cards/card-animation-on-hover";
+@import "black-dashboard-react/custom/cards/card-collapse";
+@import "black-dashboard-react/custom/cards/card-contributions";
+@import "black-dashboard-react/custom/cards/card-lock";
+@import "black-dashboard-react/custom/cards/card-pricing";
+@import "black-dashboard-react/custom/cards/card-profile";
 @import "black-dashboard-react/custom/cards/card-plain";
+@import "black-dashboard-react/custom/cards/card-register";
+@import "black-dashboard-react/custom/cards/card-stats";
+@import "black-dashboard-react/custom/cards/card-subcategories";
+@import "black-dashboard-react/custom/cards/card-testimonials";
+@import "black-dashboard-react/custom/cards/card-wizard";
 
-// React differences
-@import "black-dashboard-react/react-differences/react-differences";
+// React Differences
+@import "black-dashboard-react/react/react-differences";

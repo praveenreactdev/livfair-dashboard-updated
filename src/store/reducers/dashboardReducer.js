@@ -3,7 +3,8 @@ const initialState = {
     summary:[],
     events:[],
     exhibitors:[],
-    initialValues:{}
+    initialValues:{},
+    eventCreationStatus:false
   };
 
 export default function (state = initialState, action) {
@@ -23,6 +24,9 @@ export default function (state = initialState, action) {
       }
       case 'LOAD_EXHIBITORS': {
         return {...state,exhibitors:action.payload.exhibitors}
+      }
+      case 'CREATE_EVENT_SUCCESS':{
+        return {...state,eventCreationStatus:true}
       }
         
       default:

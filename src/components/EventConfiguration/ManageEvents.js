@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux";
 import {ReactComponent as AddLogo } from '../../assets/img/plus.svg'
-import {loadEvents} from '../../store/actions/dashboardActions'
+import {loadEvents,deleteEvent} from '../../store/actions/dashboardActions'
 import { NavLink, Link } from "react-router-dom";
 
 import {
@@ -40,7 +40,7 @@ class ManageEvents extends React.Component {
             <>
             <div className="content">
                 <Row>
-                            <Col lg="4" xs="12">
+                            <Col lg="4" xs="12" style={{marginBottom:'16px'}}>
                                 <Card className="card-chart" style={{height:'100%'}}>
                                     <CardHeader>
                                         <h5 className="card-category">Add New</h5>
@@ -59,7 +59,7 @@ class ManageEvents extends React.Component {
                     //this.props.dashboard.events.length > 0 ? 
                      this.props.dashboard.events.map(d=>{
                         return (
-                            <Col lg="4" xs="12" key={d.name}>
+                            <Col lg="4" xs="12" key={d.name+d.eventId} style={{marginBottom:'16px'}}>
                                 <Card className="card-chart" style={{height:'100%'}}>
                                     <CardHeader>
                                         <h5 className="card-category">{d.name}</h5>
@@ -101,6 +101,15 @@ class ManageEvents extends React.Component {
                                                     >
                                                         Edit Event
                                                     </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => {e.preventDefault();
+                                                            //this.props.history.push(`/admin/exhibitors-list/${d.eventId}`) 
+                                                            this.props.deleteEvent({eventId:d.eventId})
+                                                        }}
+                                                    >
+                                                       <span style={{color:'red'}}>Delete Event</span>
+                                                    </DropdownItem>
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                     </CardHeader>
@@ -124,4 +133,4 @@ const mapStateToProps = (state)=>({
 })
 
 
-export default connect(mapStateToProps,{loadEvents})(ManageEvents)
+export default connect(mapStateToProps,{loadEvents,deleteEvent})(ManageEvents)
