@@ -59,7 +59,7 @@ class ManageEvents extends React.Component {
                     //this.props.dashboard.events.length > 0 ? 
                      this.props.dashboard.events.map(d=>{
                         return (
-                            <Col lg="4" xs="12" key={d.name+d.eventId} style={{marginBottom:'16px'}}>
+                            <Col lg="4" xs="12" key={d.name+d.eventId+'asfdasdaxg216'} style={{marginBottom:'16px'}}>
                                 <Card className="card-chart" style={{height:'100%'}}>
                                     <CardHeader>
                                         <h5 className="card-category">{d.name}</h5>
@@ -99,7 +99,7 @@ class ManageEvents extends React.Component {
                                                         
                                                         }}
                                                     >
-                                                        Edit Event
+                                                        Manage Exhibitors
                                                     </DropdownItem>
                                                     <DropdownItem
                                                         href="#pablo"

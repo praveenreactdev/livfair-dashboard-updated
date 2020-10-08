@@ -23,6 +23,8 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import AdminLayout from "layouts/Admin/Admin.js";
 import RTLLayout from "layouts/RTL/RTL.js";
+import AuthLayout from "layouts/Auth/Auth.js";
+
 import {Provider} from 'react-redux';
 
 import "assets/scss/black-dashboard-react.scss";
@@ -36,8 +38,12 @@ import { reducer as reduxFormReducer } from 'redux-form'
 // Reducers
 
 import  dashboardReducer from 'store/reducers/dashboardReducer'
+import authReducer from 'store/reducers/authReducer'
+import chartReducer from "store/reducers/chartReducer";
 const reducers =  combineReducers({
   dashboard:dashboardReducer,
+  authentication:authReducer,
+  summary:chartReducer,
   form: reduxFormReducer
 });
 
@@ -61,9 +67,11 @@ ReactDOM.render(
 <Provider store={store}>
 <Router history={hist}>
     <Switch>
+    <Route path="/auth" render={props => <AuthLayout {...props} />} />
       <Route path="/admin" render={props => <AdminLayout {...props} />} />
       <Route path="/rtl" render={props => <RTLLayout {...props} />} />
-      <Redirect from="/" to="/admin/dashboard" />
+
+      <Redirect from="/" to="/auth/login" />
     </Switch>
   </Router>
 </Provider>

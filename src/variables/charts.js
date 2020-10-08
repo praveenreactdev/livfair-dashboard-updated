@@ -254,6 +254,17 @@ let chartExample2 = {
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
+
+
+let chartExample5 = {
+  options: {
+    maintainAspectRatio: false,
+    legend: {
+      display: true
+    },
+    responsive: true
+  }
+}
 let chartExample3 = {
   data: canvas => {
     let ctx = canvas.getContext("2d");
@@ -423,5 +434,7 @@ module.exports = {
   chartExample1, // in src/views/Dashboard.js
   chartExample2, // in src/views/Dashboard.js
   chartExample3, // in src/views/Dashboard.js
-  chartExample4 // in src/views/Dashboard.js
+  chartExample4, // in src/views/Dashboard.js
+  chartExample5,
+  chart1_2_options
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {loadEvents,loadExhibitors} from '../../store/actions/dashboardActions'
+import {loadEvents,loadExhibitors,editExhibitor} from '../../store/actions/dashboardActions'
 import { connect } from "react-redux";
 
 import {
@@ -83,6 +83,7 @@ class ExhibitorsList extends Component {
                             color="success"
                             id="tooltip932549650"
                             size="sm"
+                            onClick={e=>{this.props.history.push('/admin/edit-exhibitor/'+exhibitor.exhibitorId)}}
                           >
                             <i className="tim-icons icon-pencil" />
                           </Button>
@@ -132,4 +133,4 @@ const mapStateToProps = (state)=>({
 })
 
 
-export default connect(mapStateToProps,{loadExhibitors})(ExhibitorsList)
+export default connect(mapStateToProps,{loadExhibitors,editExhibitor})(ExhibitorsList)

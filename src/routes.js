@@ -27,6 +27,12 @@ import EventConfigForm from "components/EventConfiguration/EventConfigForm"
 import ManageEvents from "components/EventConfiguration/ManageEvents"
 import ExhibitorsList from 'components/EventConfiguration/ExhibitorsList'
 import CreateExhibitor from 'components/EventConfiguration/CreateExhibitor'
+import ManageExhibitor from 'components/EventConfiguration/ManageExhibitor'
+
+import Login from 'views/pages/Login';
+import Register from 'views/pages/Register';
+
+
 var routes = [
   {
     path: "/dashboard",
@@ -58,6 +64,16 @@ var routes = [
 
   },
   {
+    path: "/edit-exhibitor/:exhibitorId",
+    name: "Manage Events",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-notes",
+    component: ManageExhibitor,
+    layout: "/admin",
+    sideNav:false
+
+  },
+  {
     path: "/exhibitors-list/:eventId",
     name: "Exhibitors List",
     rtlName: "الرموز",
@@ -75,6 +91,35 @@ var routes = [
     component: CreateExhibitor,
     layout: "/admin",
     sideNav:false
-  }
+  },
+  {
+    collapse: true,
+    name: "Pages",
+    rtlName: "صفحات",
+    icon: "tim-icons icon-image-02",
+    state: "pagesCollapse",
+    views: [
+      {
+        path: "/login",
+        name: "Login",
+        rtlName: "هعذاتسجيل الدخول",
+        mini: "L",
+        rtlMini: "هعذا",
+        component: Login,
+        layout: "/auth",
+        sideNav:false
+      },
+      {
+        path: "/register",
+        name: "Register",
+        rtlName: "تسجيل",
+        mini: "R",
+        rtlMini: "صع",
+        component: Register,
+        layout: "/auth",
+        sideNav:false
+      }
+    ]
+  },
 ];
 export default routes;
