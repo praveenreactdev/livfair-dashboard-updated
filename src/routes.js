@@ -31,6 +31,7 @@ import ManageExhibitor from 'components/EventConfiguration/ManageExhibitor'
 
 import Login from 'views/pages/Login';
 import Register from 'views/pages/Register';
+import Reports from "components/EventConfiguration/Reports";
 
 
 var routes = [
@@ -59,6 +60,16 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-notes",
     component: ManageEvents,
+    layout: "/admin",
+    sideNav:true
+
+  },
+  {
+    path: "/reports",
+    name: "Reports",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-notes",
+    component: Reports,
     layout: "/admin",
     sideNav:true
 

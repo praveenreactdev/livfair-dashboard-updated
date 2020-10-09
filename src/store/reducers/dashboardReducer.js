@@ -28,6 +28,22 @@ export default function (state = initialState, action) {
       case 'CREATE_EVENT_SUCCESS':{
         return {...state,eventCreationStatus:true}
       }
+      case 'EDIT_EXHIBITOR':{
+        console.log('in reducer edit exhi')
+        let {exhibitorId} = action.payload;
+
+        let {exhibitors} = state;
+        console.log(exhibitorId)
+        if(exhibitors.length > 0){
+          console.log('inside > 0')
+          let ex = exhibitors.filter(x=> x.exhibitorId = exhibitorId)[0]
+          delete ex['_id']
+          return {...state,initialValues:ex}
+        }else{
+          return {...state}
+        }
+
+      }
         
       default:
         return state;

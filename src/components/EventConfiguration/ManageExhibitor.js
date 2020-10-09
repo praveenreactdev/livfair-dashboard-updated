@@ -2,7 +2,7 @@ import React ,{Fragment,useEffect } from 'react'
 import { Field,FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 import { Input, FormFeedback, FormText,Button } from 'reactstrap';
-import {editExhibitor} from '../../store/actions/dashboardActions'
+import {editExhibitor,updateExhibitor} from '../../store/actions/dashboardActions'
 const renderField = ({ input, label, type,custom,warning, meta: { touched, error } }) => (
     <div style={{marginBottom:'4px'}}>
       <label>{label}</label>
@@ -67,7 +67,7 @@ const renderAmenties = ({ fields, meta: { touched, error, submitFailed } }) => (
     <ul style={{listStyle:'none'}}>
       <li>
       <Button color="info" className="btn-round" size="sm" onClick={() => fields.push({})}>
-        Add Spotlight
+        Add Amenities
       </Button>
       {(touched || submitFailed) && error && <span>{error}</span>}
       </li>
@@ -127,7 +127,7 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
           label="ID"
         />
         <Field
-          name={`${media}.subvenue`}
+          name={`${media}.subVenue`}
           type="text"
           component={renderField}
           label="Sub Venue"
@@ -150,7 +150,7 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
           component={renderField}
           label="Model"
         />
-              <FieldArray name="amenities" component={renderAmenties}/>
+        <FieldArray name={`${media}.amenities`} component={renderAmenties}/>
 
       </li>
     ))}
@@ -158,14 +158,25 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
 );
 
 const EditExhibitor = props => {
-  const { handleSubmit, pristine, reset, submitting,match:{params} ,editExhibitor} = props
+  const { handleSubmit, pristine, reset, submitting,match:{params} ,editExhibitor,dashboard,updateExhibitor} = props
+  console.log(props)
+  console.log(dashboard)
     useEffect(()=>{
         console.log(params.exhibitorId)
-        editExhibitor(params.exhibitorId)
+        editExhibitor({exhibitorId: params.exhibitorId})
     })
+
   return (
     <div className="content">
-<form onSubmit={handleSubmit}>
+<form onSubmit={handleSubmit(val=>{
+    updateExhibitor({value:val,props})
+    //console.log({value:val,props})
+}
+    
+    )
+    
+    
+    }>
       <Field
         name="name"
         type="text"
@@ -275,4 +286,4 @@ const exhibitorForm = reduxForm({
   enableReinitialize:true
 })(EditExhibitor)
 
-export default connect(mapStateToProps,{editExhibitor})(exhibitorForm)
+export default connect(mapStateToProps,{editExhibitor,updateExhibitor})(exhibitorForm)

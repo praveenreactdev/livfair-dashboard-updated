@@ -88,7 +88,7 @@ const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
           <Field label="Type" name={`${media}.type`} component={renderSelectField} style={{width:'100%',borderRadius:'4px',border:'0.5px solid grey',height:'40px'}}>
             <option value="Choose">Choose</option>
             <option value="Banner">Banner</option>
-            <option value="Option2">Option2</option>
+            <option value="Option2">Reception Video</option>
           </Field>
         </div>
       </div>

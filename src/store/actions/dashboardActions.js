@@ -152,8 +152,28 @@ export const deleteEvent = (payload) =>dispatch =>{
 
 export const editExhibitor = (data) => dispatch =>{
   let {exhibitorId} = data;
+  console.log('in action ',data)
   dispatch({
     type:'EDIT_EXHIBITOR',
     payload:{exhibitorId}
+  })
+}
+
+export const updateExhibitor = (data) =>dispatch =>{
+  let {exhibitorId,eventId} = data.value;
+  let {props} = data;
+  axios.post(config.eventConfigurationBaseURL+'createExhibitor',data.value,{headers:{
+    'Content-Type':'application/json'
+  }}).then(res=>{
+    let response = res.data;
+    let {status,code} = response;
+    if(code != "200"){
+      dispatch(loadExhibitors(eventId))
+      props.history.push('/admin/exhibitors-list/'+eventId)
+    }else{
+     //dispatch(loadEvents(payload))
+     dispatch(loadExhibitors(eventId))
+      props.history.push('/admin/exhibitors-list/'+eventId)
+    }
   })
 }
