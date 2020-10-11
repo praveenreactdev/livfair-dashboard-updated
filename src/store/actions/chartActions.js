@@ -14,7 +14,7 @@ const config = {
     getChatData: '/v1/chatData',
     getMetaDataURL:"/init/getMetaData",
     websocketRootPath:process.env.REACT_APP_WEBSOCKET_ROOT_PATH || "ws://localhost:8000/",
-    eventConfigurationBaseURL:'http://localhost:4100/',
+    eventConfigurationBaseURL:'https://event-manager.livfair.com/',
     websocketURL:"ws://localhost:8000/api/ws/notification",
     changePasswordURL:"/v1/updatePassword",
     updateUserURL:"/v1/updateUser/",
@@ -36,14 +36,12 @@ export const getChartData = (values) => (dispatch) => {
     .get(config.apiRootPath + config.getChartData, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization":'Bearer '+ config.token//sessionStorage.getItem('accessToken')
+        "Authorization":'Bearer '+ sessionStorage.getItem('access_token')
       },
     })
     .then((res) => {
-      console.log(res)
       if (res.data.success) {
         let { summary } = res.data;
-        console.log(summary)
         dispatch({
           payload: summary,
           type: 'LOAD_CHART_DATA',

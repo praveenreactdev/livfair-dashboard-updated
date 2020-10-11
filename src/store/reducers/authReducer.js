@@ -1,9 +1,28 @@
+import jwt_decode from "jwt-decode";
 
 const initialState = {
-    isAuthenticated:false
+    isAuthenticated:false,
+    userDetails:{},
+    token:sessionStorage.getItem('access_token')
   };
 
-export default function (state = initialState, action) {
+var  accessToken = sessionStorage.getItem('access_token')
+function getInitialState(){
+    if(accessToken !== null && accessToken != undefined){
+        let decoded = jwt_decode(accessToken);
+        let initialState = {
+            isAuthenticated:true,
+            userDetails:decoded,
+            token:accessToken
+        }
+        return initialState;
+    }else{
+        return initialState
+    }
+}
+
+
+export default function (state = getInitialState(), action) {
     switch (action.type) {
       case 'LOGIN_SUCCESS':
         return {

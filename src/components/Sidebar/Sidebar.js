@@ -20,7 +20,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
-
+import { connect } from "react-redux";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
@@ -54,8 +54,23 @@ class Sidebar extends React.Component {
   linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
   };
+
+  checkPrivelege = (routePrivilege,role)=>{
+    if(Array.isArray(routePrivilege) && routePrivilege.length == 0){
+      return true;
+    }else if(Array.isArray(routePrivilege) && routePrivilege.length >0){
+      let a = routePrivilege.filter(x=> x == role)[0]
+      if(a !== null && a != undefined){
+        return true
+      }else{
+        return false;
+      }
+    }
+  }
+
   render() {
-    const { bgColor, routes, rtlActive, logo } = this.props;
+    console.log(this.props)
+    const { bgColor, routes, rtlActive, logo,authentication:{userDetails} } = this.props;
     let logoImg = null;
     let logoText = null;
     if (logo !== undefined) {
@@ -116,7 +131,8 @@ class Sidebar extends React.Component {
           ) : null}
           <Nav>
             {routes.map((prop, key) => {
-              if (prop.redirect) return null;
+              if (prop.redirect ) return null;
+              if (!(this.checkPrivelege(prop.requiredPrivileges,userDetails.roleName))) return null;
               return (
                 <li
                   className={
@@ -170,4 +186,10 @@ Sidebar.propTypes = {
   })
 };
 
-export default Sidebar;
+const mapStateToProps = (state)=>{
+  return {
+    authentication:state.authentication
+  }
+}
+
+export default connect(mapStateToProps,{})(Sidebar);

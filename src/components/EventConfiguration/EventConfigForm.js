@@ -2,7 +2,7 @@ import React ,{Fragment} from 'react'
 import { Field,FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 import { Input, FormFeedback, FormText,Button, FormGroup} from 'reactstrap';
-import ReactDatetime from "react-datetime";
+//import ReactDatetime from "react-datetime";
 import { Redirect } from 'react-router-dom';
 import {createEvent} from '../../store/actions/dashboardActions'
 const required = value => value ? undefined : 'Required'
@@ -35,13 +35,13 @@ const renderDateField = ({input,label,meta:{touched,error},children,...custom}) 
   <div>
     <label>{label}</label>
     <FormGroup>
-    <ReactDatetime
+    {/* <ReactDatetime
                       inputProps={{
                         className: "form-control",
                        
                       }}
                       timeFormat={false}
-                    />
+                    /> */}
 
     </FormGroup>
     

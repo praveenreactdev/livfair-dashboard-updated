@@ -48,6 +48,7 @@ class Login extends React.Component {
   }
   // {this.props.authentication.isAuthenticated ? this.props.history.push('/admin/dashboard') : ''}
   render() {
+    console.log(this.props)
     return (
       <>
         {this.props.authentication.isAuthenticated ? this.props.history.push('/admin/dashboard') : ''}

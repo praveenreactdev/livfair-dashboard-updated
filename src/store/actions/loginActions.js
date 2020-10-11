@@ -1,4 +1,5 @@
 import axios from 'axios'
+import jwt_decode from "jwt-decode";
 
 
 const  config = {
@@ -15,7 +16,7 @@ const  config = {
     getChatData: '/v1/chatData',
     getMetaDataURL:"/init/getMetaData",
     websocketRootPath:process.env.REACT_APP_WEBSOCKET_ROOT_PATH || "ws://localhost:8000/",
-    eventConfigurationBaseURL:'http://localhost:4100/',
+    eventConfigurationBaseURL:'https://event-manager.livfair.com/',
     websocketURL:"ws://localhost:8000/api/ws/notification",
     changePasswordURL:"/v1/updatePassword",
     updateUserURL:"/v1/updateUser/",
@@ -29,7 +30,7 @@ const  config = {
     getEvents:'getEvents',
     getExhibitorsForEvent:'getExhibitorsForEvent'
   };
-  
+
 export const login = (values) => (dispatch) => {
     axios
       .post(config.apiRootPath + config.authenticationURL,values, {
@@ -42,8 +43,10 @@ export const login = (values) => (dispatch) => {
         if (res.data.success) {
           let { token,isAuthenticated } = res.data;
           sessionStorage.setItem('access_token',token)
+            let decoded = jwt_decode(token)
+            console.log('decoded token',decoded)
           dispatch({
-            payload: {token,isAuthenticated},
+            payload: {token,isAuthenticated,userDetails:decoded},
             type: 'LOGIN_SUCCESS',
           });
         }

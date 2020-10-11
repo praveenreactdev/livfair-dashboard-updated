@@ -16,13 +16,6 @@
 
 */
 import Dashboard from "views/Dashboard.js";
-import Icons from "views/Icons.js";
-import Map from "views/Map.js";
-import Notifications from "views/Notifications.js";
-import Rtl from "views/Rtl.js";
-import TableList from "views/TableList.js";
-import Typography from "views/Typography.js";
-import UserProfile from "views/UserProfile.js";
 import EventConfigForm from "components/EventConfiguration/EventConfigForm"
 import ManageEvents from "components/EventConfiguration/ManageEvents"
 import ExhibitorsList from 'components/EventConfiguration/ExhibitorsList'
@@ -42,7 +35,8 @@ var routes = [
     icon: "tim-icons icon-chart-pie-36",
     component: Dashboard,
     layout: "/admin",
-    sideNav:true
+    sideNav:true,
+    requiredPrivileges:["Admin","Exhibitor"]
   },
   {
     path: "/create-event",
@@ -51,8 +45,8 @@ var routes = [
     icon: "tim-icons icon-notes",
     component: EventConfigForm,
     layout: "/admin",
-    sideNav:false
-
+    sideNav:false,
+    requiredPrivileges:["Admin"]
   },
   {
     path: "/manage-event",
@@ -61,7 +55,8 @@ var routes = [
     icon: "tim-icons icon-notes",
     component: ManageEvents,
     layout: "/admin",
-    sideNav:true
+    sideNav:true,
+    requiredPrivileges:["Admin"]
 
   },
   {
@@ -71,7 +66,8 @@ var routes = [
     icon: "tim-icons icon-notes",
     component: Reports,
     layout: "/admin",
-    sideNav:true
+    sideNav:true,
+    requiredPrivileges:["Admin","Exhibitor"]
 
   },
   {
@@ -81,7 +77,8 @@ var routes = [
     icon: "tim-icons icon-notes",
     component: ManageExhibitor,
     layout: "/admin",
-    sideNav:false
+    sideNav:false,
+    requiredPrivileges:["Admin"]
 
   },
   {
@@ -91,7 +88,8 @@ var routes = [
     icon: "tim-icons icon-notes",
     component: ExhibitorsList,
     layout: "/admin",
-    sideNav:false
+    sideNav:false,
+    requiredPrivileges:["Admin"]
 
   },
   {
@@ -101,7 +99,8 @@ var routes = [
     icon: "tim-icons icon-notes",
     component: CreateExhibitor,
     layout: "/admin",
-    sideNav:false
+    sideNav:false,
+    requiredPrivileges:["Admin"]
   },
   {
     collapse: true,
@@ -118,7 +117,8 @@ var routes = [
         rtlMini: "هعذا",
         component: Login,
         layout: "/auth",
-        sideNav:false
+        sideNav:false,
+        requiredPrivileges:[]
       },
       {
         path: "/register",
@@ -128,7 +128,8 @@ var routes = [
         rtlMini: "صع",
         component: Register,
         layout: "/auth",
-        sideNav:false
+        sideNav:false,
+        requiredPrivileges:[]
       }
     ]
   },

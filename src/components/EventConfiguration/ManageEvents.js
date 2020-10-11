@@ -96,7 +96,6 @@ class ManageEvents extends React.Component {
                                                         href="#pablo"
                                                         onClick={e => {e.preventDefault();
                                                             this.props.history.push(`/admin/exhibitors-list/${d.eventId}`) 
-                                                        
                                                         }}
                                                     >
                                                         Manage Exhibitors
