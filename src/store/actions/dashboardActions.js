@@ -14,7 +14,8 @@ const config = {
   getChatData: '/v1/chatData',
   getMetaDataURL:"/init/getMetaData",
   websocketRootPath:process.env.REACT_APP_WEBSOCKET_ROOT_PATH || "ws://localhost:8000/",
-  eventConfigurationBaseURL:'https://event-manager.livfair.com/',
+  //eventConfigurationBaseURL:'https://event-manager.livfair.com/',
+  eventConfigurationBaseURL:'http://localhost:4100/',
   websocketURL:"ws://localhost:8000/api/ws/notification",
   changePasswordURL:"/v1/updatePassword",
   updateUserURL:"/v1/updateUser/",
@@ -26,7 +27,8 @@ const config = {
   loginEvent:'/v1/logEvent',
   logoutEvent:'/v1/logout',
   getEvents:'getEvents',
-  getExhibitorsForEvent:'getExhibitorsForEvent'
+  getExhibitorsForEvent:'getExhibitorsForEvent',
+  getEventActivities:'getEventActivities'
 };
 
 export const loadDashboard = (values) => (dispatch) => {
@@ -176,4 +178,18 @@ export const updateExhibitor = (data) =>dispatch =>{
       props.history.push('/admin/exhibitors-list/'+eventId)
     }
   })
+}
+
+export const getEventActivities = (eventId) => (dispatch) =>{
+  axios
+    .get(config.eventConfigurationBaseURL + config.getEventActivities + `/${eventId}`)
+    .then((res) => {
+      if (res.data.status) {
+        let { eventActivities } = res.data;
+        dispatch({
+          payload: eventActivities,
+          type: 'LOAD_EVENT_ACTIVITIES',
+        });
+      }
+    });
 }

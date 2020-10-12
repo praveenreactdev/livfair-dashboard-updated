@@ -4,6 +4,7 @@ const initialState = {
     events:[],
     exhibitors:[],
     initialValues:{},
+    eventActivities:[],
     eventCreationStatus:false
   };
 
@@ -43,6 +44,9 @@ export default function (state = initialState, action) {
           return {...state}
         }
 
+      }
+      case 'LOAD_EVENT_ACTIVITIES':{
+        return {...state,eventActivities:action.payload}
       }
         
       default:

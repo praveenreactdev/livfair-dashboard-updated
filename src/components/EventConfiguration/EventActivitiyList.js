@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {loadEvents,loadExhibitors,editExhibitor} from '../../store/actions/dashboardActions'
+import {loadEvents,loadExhibitors,editExhibitor,getEventActivities} from '../../store/actions/dashboardActions'
 import { connect } from "react-redux";
-import EventActivityList from './EventActivitiyList'
+
 import {
     BreadcrumbItem,
     Button,
@@ -24,14 +24,13 @@ import {
     UncontrolledTooltip
   } from "reactstrap";
 import { textChangeRangeIsUnchanged } from 'typescript';
-class ExhibitorsList extends Component {
+class EventActivityList extends Component {
 
     
     componentDidMount() {
-        const { match: { params } } = this.props;
+        const { eventId } = this.props;
         console.log(this.props)
-        this.props.loadExhibitors(params.eventId)
-        console.log(params)
+        this.props.getEventActivities(eventId)
       }
 
     render() {
@@ -42,9 +41,9 @@ class ExhibitorsList extends Component {
               <Card>
                 <CardHeader>
                   <div className="tools float-right">
-                        <Button color="info" onClick={()=>{this.props.history.push('/admin/create-exhibitor')}}>Add</Button>
+                        <Button color="info" onClick={()=>{this.props.history.push('/admin/create-eventActivity/'+this.props.eventId)}}>Add</Button>
                   </div>
-        <CardTitle tag="h4">{`Exhibitors List`}</CardTitle>
+        <CardTitle tag="h4">{`Event Activity List`}</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
@@ -52,31 +51,31 @@ class ExhibitorsList extends Component {
                       <tr>
                         <th className="text-center">#</th>
                         <th>Name</th>
-                        <th>Website</th>
-                        <th className="text-center">Exhibitor Id</th>
+                        <th>Type</th>
+                        <th className="text-center">Hall</th>
                         <th className="text-right">Status</th>
                         <th className="text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {
-                          this.props.dashboard.exhibitors.length > 0 ? (
+                          this.props.dashboard.eventActivities.length > 0 ? (
 
-                            this.props.dashboard.exhibitors.map(exhibitor=>{
+                            this.props.dashboard.eventActivities.map((exhibitor,key)=>{
                                 return (
-                                    <tr key={exhibitor.name+exhibitor.eventId+exhibitor.exhibitorId}>
+                                    <tr key={exhibitor.name+exhibitor.type}>
                         <td className="text-center">
                           <div className="photo">
-                            <img
+                            {/* <img
                               alt="..."
-                              //src={require("assets/img/jana.jpg")}
                               src={exhibitor.logo}
-                            />
+                            /> */}
+                            {key+1}
                           </div>
                         </td>
                                 <td>{exhibitor.name}</td>
-                        <td>{exhibitor.website}</td>
-                                <td className="text-center">{exhibitor.exhibitorId}</td>
+                        <td>{exhibitor.type}</td>
+                                <td className="text-center">{exhibitor.hall}</td>
                                 <td className="text-right">{exhibitor.isActive == 'Y' ? (<p style={{color:'#2dd72d'}}>Active</p>) :(<p style={{color:'red'}}>InActive</p>)}</td>
                         <td className="text-right">
                           <Button
@@ -92,7 +91,7 @@ class ExhibitorsList extends Component {
                             delay={0}
                             target="tooltip932549650"
                           >
-                            Edit Exhibitor
+                            Edit Activity
                           </UncontrolledTooltip>
                           <Button
                             className="btn-link btn-neutral"
@@ -106,7 +105,7 @@ class ExhibitorsList extends Component {
                             delay={0}
                             target="tooltip696208424"
                           >
-                            Remove Exhibitor
+                            Remove Activity
                           </UncontrolledTooltip>
                         </td>
                       </tr>
@@ -124,8 +123,6 @@ class ExhibitorsList extends Component {
             </Col>
             
                     </Row>
-                    <EventActivityList eventId={this.props.match.params.eventId} history={this.props.history}></EventActivityList>
-
             </div>
         )
     }
@@ -136,4 +133,4 @@ const mapStateToProps = (state)=>({
 })
 
 
-export default connect(mapStateToProps,{loadExhibitors,editExhibitor})(ExhibitorsList)
+export default connect(mapStateToProps,{loadExhibitors,editExhibitor,getEventActivities})(EventActivityList)

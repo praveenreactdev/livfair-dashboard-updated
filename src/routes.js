@@ -25,6 +25,7 @@ import ManageExhibitor from 'components/EventConfiguration/ManageExhibitor'
 import Login from 'views/pages/Login';
 import Register from 'views/pages/Register';
 import Reports from "components/EventConfiguration/Reports";
+import CreateEventActivity from "components/EventConfiguration/CreateEventActivity";
 
 
 var routes = [
@@ -44,6 +45,16 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-notes",
     component: EventConfigForm,
+    layout: "/admin",
+    sideNav:false,
+    requiredPrivileges:["Admin"]
+  },
+  {
+    path: "/create-eventActivity/:eventId",
+    name: "Create Event Activity",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-notes",
+    component: CreateEventActivity,
     layout: "/admin",
     sideNav:false,
     requiredPrivileges:["Admin"]

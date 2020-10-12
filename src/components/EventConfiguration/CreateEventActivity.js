@@ -1,8 +1,8 @@
-import React ,{Fragment,useEffect } from 'react'
+import React ,{Fragment} from 'react'
 import { Field,FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 import { Input, FormFeedback, FormText,Button } from 'reactstrap';
-import {editExhibitor,updateExhibitor} from '../../store/actions/dashboardActions'
+
 const renderField = ({ input, label, type,custom,warning, meta: { touched, error } }) => (
     <div style={{marginBottom:'4px'}}>
       <label>{label}</label>
@@ -18,11 +18,11 @@ const renderField = ({ input, label, type,custom,warning, meta: { touched, error
     </div>
   );
 
-const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
+const renderEngagement = ({ fields, meta: { touched, error, submitFailed } }) => (
   <ul style={{listStyle:'none'}}>
     <li>
     <Button color="info" className="btn-round" size="sm" onClick={() => fields.push({})}>
-        Add Media
+        Add Engagement
       </Button>
       {(touched || submitFailed) && error && <span>{error}</span>}
     </li>
@@ -30,10 +30,10 @@ const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
       <li key={index}>
         <button
           type="button"
-          title="Remove Media"
+          title="Remove Engagement"
           onClick={() => fields.remove(index)}
         />
-        <h4 style={{color:'white'}}>Media #{index + 1}</h4>
+        <h4 style={{color:'white'}}>Engagement #{index + 1}</h4>
         <Field
           name={`${media}.name`}
           type="text"
@@ -41,10 +41,10 @@ const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
           label="Name"
         />
         <Field
-          name={`${media}.url`}
+          name={`${media}.id`}
           type="text"
           component={renderField}
-          label="URL"
+          label="Id"
         />
         <Field
           name={`${media}.type`}
@@ -53,21 +53,32 @@ const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
           label="Type"
         />
         <Field
-          name={`${media}.category`}
+          name={`${media}.question`}
           type="text"
           component={renderField}
-          label="Category"
+          label="Question"
         />
+        <Field
+          name={`${media}.pollingType`}
+          type="text"
+          component={renderField}
+          label="PollingType"
+        />
+        <FieldArray
+        component={renderOptions}
+        name={`${media}.options`}        
+        ></FieldArray>
       </li>
     ))}
   </ul>
 );
 
-const renderAmenties = ({ fields, meta: { touched, error, submitFailed } }) => (
+
+const renderOptions = ({ fields, meta: { touched, error, submitFailed } }) => (
     <ul style={{listStyle:'none'}}>
       <li>
       <Button color="info" className="btn-round" size="sm" onClick={() => fields.push({})}>
-        Add Amenities
+        Add Option
       </Button>
       {(touched || submitFailed) && error && <span>{error}</span>}
       </li>
@@ -75,27 +86,15 @@ const renderAmenties = ({ fields, meta: { touched, error, submitFailed } }) => (
         <li key={index}>
           <button
             type="button"
-            title="Remove Amenity"
+            title="Remove Option"
             onClick={() => fields.remove(index)}
           />
-          <h4 style={{color:'white'}}>Amenity #{index + 1}</h4>
+          <h4 style={{color:'white'}}>Option #{index + 1}</h4>
           <Field
-            name={`${media}.name`}
             type="text"
+            name={`${media}.option`}
             component={renderField}
-            label="Name"
-          />
-          <Field
-            name={`${media}.type`}
-            type="text"
-            component={renderField}
-            label="Type"
-          />
-          <Field
-            name={`${media}.source`}
-            type="text"
-            component={renderField}
-            label="Source"
+            label="Value"
           />
         </li>
       ))}
@@ -127,7 +126,7 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
           label="ID"
         />
         <Field
-          name={`${media}.subVenue`}
+          name={`${media}.subvenue`}
           type="text"
           component={renderField}
           label="Sub Venue"
@@ -150,43 +149,23 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
           component={renderField}
           label="Model"
         />
-        <FieldArray name={`${media}.amenities`} component={renderAmenties}/>
+              {/* <FieldArray name="amenities" component={renderAmenties}/> */}
 
       </li>
     ))}
   </ul>
 );
 
-const EditExhibitor = props => {
-  const { handleSubmit, pristine, reset, submitting,match:{params} ,editExhibitor,dashboard,updateExhibitor} = props
-  console.log(props)
-  console.log(dashboard)
-    useEffect(()=>{
-        console.log(params.exhibitorId)
-        editExhibitor({exhibitorId: params.exhibitorId})
-    })
-
+const CreateEventActivity = props => {
+  const { handleSubmit, pristine, reset, submitting } = props
   return (
     <div className="content">
-<form onSubmit={handleSubmit(val=>{
-    updateExhibitor({value:val,props})
-}
-    
-    )
-    
-    
-    }>
+<form onSubmit={handleSubmit(val=>{console.log(val)})}>
       <Field
         name="name"
         type="text"
         component={renderField}
-        label="Event Name"
-      />
-      <Field
-        name="description"
-        type="text"
-        component={renderField}
-        label="Description"
+        label="Name"
       />
       <Field
         name="eventId"
@@ -195,10 +174,16 @@ const EditExhibitor = props => {
         label="Event ID"
       />
       <Field
-        name="phoneNo"
+        name="data"
         type="text"
         component={renderField}
-        label="Phone Number"
+        label="Data"
+      />
+      <Field
+        name="hall"
+        type="text"
+        component={renderField}
+        label="Venue"
       />
       <Field
         name="emailId"
@@ -207,55 +192,15 @@ const EditExhibitor = props => {
         label="Email ID"
       />
       <Field
-        name="logo"
+        name="description"
         type="text"
         component={renderField}
-        label="Logo URL"
+        label="Description"
       />
-      <Field
-        name="exhibitorId"
-        type="text"
-        component={renderField}
-        label="Exhibitor Id"
-      />
-      <Field
-        name="website"
-        type="text"
-        component={renderField}
-        label="Website URL"
-      />
-      <Field
-        name="logo"
-        type="text"
-        component={renderField}
-        label="Logo"
-      />
-      <Field
-        name="address.street"
-        type="text"
-        component={renderField}
-        label="Address - Street"
-      />
-      <Field
-        name="address.city"
-        type="text"
-        component={renderField}
-        label="City"
-      />
-      <Field
-        name="address.state"
-        type="text"
-        component={renderField}
-        label="State"
-      />
-      <Field
-        name="address.zipcode"
-        type="text"
-        component={renderField}
-        label="Zipcode"
-      />
-      <FieldArray name="metadata.media" component={renderMedia}/>
-      <FieldArray name="booths" component={renderBooths}/>
+      
+      
+      <FieldArray name="userEngagements" component={renderEngagement}/>
+    
       <div>
       <Button className="btn-fill" color="primary" type="submit" disabled={pristine || submitting}>
                     Submit
@@ -278,11 +223,11 @@ const EditExhibitor = props => {
 
 const mapStateToProps = (state) => ({
   dashboard: state.dashboard,
-  initialValues : state.dashboard.initialValues
+  //initialValues : state.dashboard.initialValues
 });
-const exhibitorForm = reduxForm({
-  form: 'exhibitor-form' ,
+const eventActivityForm = reduxForm({
+  form: 'eventactivity-form' ,
   enableReinitialize:true
-})(EditExhibitor)
+})(CreateEventActivity)
 
-export default connect(mapStateToProps,{editExhibitor,updateExhibitor})(exhibitorForm)
+export default connect(mapStateToProps)(eventActivityForm)
