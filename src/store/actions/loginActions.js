@@ -52,3 +52,12 @@ export const login = (values) => (dispatch) => {
         }
       });
   };
+
+
+  export const logout = () => (dispatch)=>{
+    sessionStorage.removeItem('access_token');
+    dispatch({
+      type:'LOGOUT',
+      payload:{}
+    })
+  }

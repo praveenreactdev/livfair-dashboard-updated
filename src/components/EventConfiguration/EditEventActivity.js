@@ -1,15 +1,13 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,useEffect } from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 import { Input, FormFeedback, FormText, Button } from 'reactstrap';
-import { createEventActivity } from '../../store/actions/dashboardActions'
+import { editExhibitor,editEventActivity } from 'store/actions/dashboardActions';
+
 const renderField = ({ input, label, type, custom, warning, meta: { touched, error } }) => (
   <div style={{ marginBottom: '4px' }}>
     <label>{label}</label>
-    {/* <div>
-        <input {...input} type={type} placeholder={label} style={{width:'100%',borderRadius:'4px',border:'0.5px solid grey',height:'40px'}} />
-        {touched && error && <span>{error}</span>}         
-      </div> */}
+    
     <Fragment>
       <Input {...(touched ? { valid: !error } : {})} {...input} {...custom} />
       {error && <FormFeedback>{error}</FormFeedback>}
@@ -156,26 +154,26 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
   </ul>
 );
 
-const createEventActivityI = (val) => {
+const createEventActivity = (val) => {
   console.log(val)
-  return new Promise((resolve, reject) => {
-    let { userEngagements } = val;
-    if (Array.isArray(userEngagements) && userEngagements.length > 0) {
-      userEngagements.map((ue, index) => {
-        let { options } = ue;
-        let tempOptions = [];
-        if (Array.isArray(options) && options.length > 0) {
-          options.map(opt => {
-            tempOptions.push(opt['name'])
-          })
-        }
-        userEngagements[index]['options'] = tempOptions;
-      })
-    }
-    val['userEngagements'] = userEngagements
-    console.log(val)
-    resolve(val)
-  })
+  let { userEngagements } = val;
+  if (Array.isArray(userEngagements) && userEngagements.length > 0) {
+    userEngagements.map((ue, index) => {
+      let { options } = ue;
+      let tempOptions = [];
+      if (Array.isArray(options) && options.length > 0) {
+        options.map(opt => {
+          tempOptions.push(opt['name'])
+        })
+      }
+      userEngagements[index]['options'] = tempOptions;
+    })
+  }
+  val['userEngagements'] = userEngagements
+
+
+  console.log(val)
+
 }
 
 const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
@@ -186,13 +184,16 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
     </Input>
   </div>
 );
-const CreateEventActivity = props => {
-  const { handleSubmit, pristine, reset, submitting, createEventActivity,history,match:{params} } = props
+const EditEventActivity = props => {
+  const { handleSubmit, pristine, reset, submitting, match: { params },editEventActivity } = props
+  console.log('initial values ',props.initialValues)
+  useEffect(() => {
+    console.log(params.eventActivityId)
+      editEventActivity({name:params.eventActivityId})
+  },[])
   return (
     <div className="content">
-      <form onSubmit={handleSubmit(val => createEventActivityI(val).then(v => {
-        createEventActivity({data:v,history});
-      }))}>
+      <form onSubmit={handleSubmit(val => createEventActivity(val))}>
         <Field
           name="name"
           type="text"
@@ -204,7 +205,7 @@ const CreateEventActivity = props => {
           type="text"
           component={renderField}
           label="Event ID"
-          value={params.eventId}
+         
         />
         <Field
           name="data"
@@ -248,7 +249,7 @@ const CreateEventActivity = props => {
         <div>
           <Button className="btn-fill" color="primary" type="submit" disabled={pristine || submitting}>
             Submit
-          </Button>
+      </Button>
           <Button
             className="btn-fill"
             color="success"
@@ -267,11 +268,11 @@ const CreateEventActivity = props => {
 
 const mapStateToProps = (state) => ({
   dashboard: state.dashboard,
-  //initialValues : state.dashboard.initialValues
+  initialValues: state.dashboard.initialValues
 });
 const eventActivityForm = reduxForm({
-  form: 'eventactivity-form',
+  form: 'edit-eventactivity-form',
   enableReinitialize: true
-})(CreateEventActivity)
+})(EditEventActivity)
 
-export default connect(mapStateToProps, { createEventActivity })(eventActivityForm)
+export default connect(mapStateToProps,{editEventActivity})(eventActivityForm)

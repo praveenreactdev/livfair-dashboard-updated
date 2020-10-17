@@ -24,8 +24,9 @@ import ManageExhibitor from 'components/EventConfiguration/ManageExhibitor'
 
 import Login from 'views/pages/Login';
 import Register from 'views/pages/Register';
-import Reports from "components/EventConfiguration/Reports";
+import Report from "components/EventConfiguration/Report";
 import CreateEventActivity from "components/EventConfiguration/CreateEventActivity";
+import EditEventActivity from "components/EventConfiguration/EditEventActivity";
 
 
 var routes = [
@@ -60,6 +61,16 @@ var routes = [
     requiredPrivileges:["Admin"]
   },
   {
+    path: "/edit-eventActivity/:eventActivityId",
+    name: "Edit Event Activity",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-notes",
+    component: EditEventActivity,
+    layout: "/admin",
+    sideNav:false,
+    requiredPrivileges:["Admin"]
+  },
+  {
     path: "/manage-event",
     name: "Manage Events",
     rtlName: "الرموز",
@@ -75,7 +86,7 @@ var routes = [
     name: "Reports",
     rtlName: "الرموز",
     icon: "tim-icons icon-notes",
-    component: Reports,
+    component: Report,
     layout: "/admin",
     sideNav:true,
     requiredPrivileges:["Admin","Exhibitor"]

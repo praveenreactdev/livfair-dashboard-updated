@@ -18,7 +18,8 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-
+import {connect} from 'react-redux'
+import {logout} from '../../store/actions/loginActions'
 // reactstrap components
 import {
   Button,
@@ -199,11 +200,7 @@ class AdminNavbar extends React.Component {
                       <DropdownItem className="nav-item">Profile</DropdownItem>
                     </NavLink>
                     <NavLink tag="li">
-                      <DropdownItem className="nav-item">Settings</DropdownItem>
-                    </NavLink>
-                    <DropdownItem divider tag="li" />
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">Log out</DropdownItem>
+                      <DropdownItem className="nav-item" onClick={()=>{this.props.logout();this.props.history.push("/")}}>Log out</DropdownItem>
                     </NavLink>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -235,4 +232,4 @@ class AdminNavbar extends React.Component {
   }
 }
 
-export default AdminNavbar;
+export default connect((state)=>{},{logout})(AdminNavbar);

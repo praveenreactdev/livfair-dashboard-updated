@@ -89,16 +89,16 @@ class AuthNavbar extends React.Component {
                   Dashboard
                 </NavLink>
               </NavItem> */}
-              <NavItem>
+              {/* <NavItem>
                 <NavLink to="/auth/register" className="nav-link">
                   <i className="tim-icons icon-laptop" /> Register
                 </NavLink>
-              </NavItem>
-              <NavItem>
+              </NavItem> */}
+              {/* <NavItem>
                 <NavLink to="/auth/login" className="nav-link">
                   <i className="tim-icons icon-single-02" /> Login
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               {/* <NavItem>
                 <NavLink to="/auth/pricing" className="nav-link">
                   <i className="tim-icons icon-coins" /> Pricing

@@ -4,3 +4,13 @@
     background-color: #5e72e4;
     color: white;
 }
+
+.download-btn button{
+    background: #1d8cf8;
+    color: white;
+    font-size: 0.875rem;
+    border-radius: 30px;
+    border-width: 1px;
+    background-image: linear-gradient(to bottom left, #1d8cf8, #3358f4, #1d8cf8);
+    padding: 5px 15px;
+}

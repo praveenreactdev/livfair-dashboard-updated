@@ -1,19 +1,19 @@
 import React from 'react'
-import { Field,FieldArray, reduxForm } from 'redux-form'
+import { Field, FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} type={type} placeholder={label} style={{width:'100%',borderRadius:'4px',border:'0.5px solid grey'}} />
-      {touched && error && <span>{error}</span>}         
+      <input {...input} type={type} placeholder={label} style={{ width: '100%', borderRadius: '4px', border: '0.5px solid grey' }} />
+      {touched && error && <span>{error}</span>}
     </div>
   </div>
 );
 
 const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
-  <ul style={{listStyle:'none'}}>
+  <ul style={{ listStyle: 'none' }}>
     <li>
       <button type="button" onClick={() => fields.push({})}>Add Media</button>
       {(touched || submitFailed) && error && <span>{error}</span>}
@@ -25,7 +25,7 @@ const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
           title="Remove Media"
           onClick={() => fields.remove(index)}
         />
-        <h4 style={{color:'white'}}>Media #{index + 1}</h4>
+        <h4 style={{ color: 'white' }}>Media #{index + 1}</h4>
         <Field
           name={`${media}.name`}
           type="text"
@@ -56,46 +56,46 @@ const renderMedia = ({ fields, meta: { touched, error, submitFailed } }) => (
 );
 
 const renderAmenties = ({ fields, meta: { touched, error, submitFailed } }) => (
-    <ul style={{listStyle:'none'}}>
-      <li>
-        <button type="button" onClick={() => fields.push({})}>Add Amenity</button>
-        {(touched || submitFailed) && error && <span>{error}</span>}
+  <ul style={{ listStyle: 'none' }}>
+    <li>
+      <button type="button" onClick={() => fields.push({})}>Add Amenity</button>
+      {(touched || submitFailed) && error && <span>{error}</span>}
+    </li>
+    {fields.map((media, index) => (
+      <li key={index}>
+        <button
+          type="button"
+          title="Remove Amenity"
+          onClick={() => fields.remove(index)}
+        />
+        <h4 style={{ color: 'white' }}>Amenity #{index + 1}</h4>
+        <Field
+          name={`${media}.name`}
+          type="text"
+          component={renderField}
+          label="Name"
+        />
+        <Field
+          name={`${media}.type`}
+          type="text"
+          component={renderField}
+          label="Type"
+        />
+        <Field
+          name={`${media}.source`}
+          type="text"
+          component={renderField}
+          label="Source"
+        />
       </li>
-      {fields.map((media, index) => (
-        <li key={index}>
-          <button
-            type="button"
-            title="Remove Amenity"
-            onClick={() => fields.remove(index)}
-          />
-          <h4 style={{color:'white'}}>Amenity #{index + 1}</h4>
-          <Field
-            name={`${media}.name`}
-            type="text"
-            component={renderField}
-            label="Name"
-          />
-          <Field
-            name={`${media}.type`}
-            type="text"
-            component={renderField}
-            label="Type"
-          />
-          <Field
-            name={`${media}.source`}
-            type="text"
-            component={renderField}
-            label="Source"
-          />
-        </li>
-      ))}
-    </ul>
-  );
-  
+    ))}
+  </ul>
+);
+
 
 
 const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
-  <ul style={{listStyle:'none'}}>
+  <ul style={{ listStyle: 'none' }}>
     <li>
       <button type="button" onClick={() => fields.push({})}>Add Booth</button>
       {(touched || submitFailed) && error && <span>{error}</span>}
@@ -107,7 +107,7 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
           title="Remove Booth"
           onClick={() => fields.remove(index)}
         />
-        <h4 style={{color:'white'}}>Booth #{index + 1}</h4>
+        <h4 style={{ color: 'white' }}>Booth #{index + 1}</h4>
         <Field
           name={`${media}.id`}
           type="text"
@@ -138,7 +138,7 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
           component={renderField}
           label="Model"
         />
-              <FieldArray name="amenities" component={renderAmenties}/>
+        <FieldArray name="amenities" component={renderAmenties} />
 
       </li>
     ))}
@@ -227,28 +227,28 @@ const ExibitorConfigForm = props => {
         component={renderField}
         label="Zipcode"
       />
-      <FieldArray name="metadata.media" component={renderMedia}/>
-      <FieldArray name="booths" component={renderBooths}/>
+      <FieldArray name="metadata.media" component={renderMedia} />
+      <FieldArray name="booths" component={renderBooths} />
       <div>
         <button type="submit" disabled={pristine || submitting}>
           Submit
         </button>
         <button type="button" disabled={pristine || submitting} onClick={reset}>
-         Reset
+          Reset
         </button>
       </div>
     </form>
-    
+
   )
 }
 
 const mapStateToProps = (state) => ({
   dashboard: state.dashboard,
-  initialValues : state.dashboard.initialValues
+  initialValues: state.dashboard.initialValues
 });
 const exhibitorForm = reduxForm({
-  form: 'exhibitor-form' ,
-  enableReinitialize:true
+  form: 'exhibitor-form',
+  enableReinitialize: true
 })(ExibitorConfigForm)
 
 export default connect(mapStateToProps)(exhibitorForm)

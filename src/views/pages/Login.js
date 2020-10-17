@@ -117,7 +117,7 @@ class Login extends React.Component {
                     >
                       Login
                     </Button>
-                    <div className="pull-left">
+                    {/* <div className="pull-left">
                       <h6>
                         <a
                           className="link footer-link"
@@ -138,7 +138,7 @@ class Login extends React.Component {
                           Need Help?
                         </a>
                       </h6>
-                    </div>
+                    </div> */}
                   </CardFooter>
                 </Card>
               </Form>

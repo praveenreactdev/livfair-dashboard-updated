@@ -40,10 +40,12 @@ import { reducer as reduxFormReducer } from 'redux-form'
 import  dashboardReducer from 'store/reducers/dashboardReducer'
 import authReducer from 'store/reducers/authReducer'
 import chartReducer from "store/reducers/chartReducer";
+import reportReducer from 'store/reducers/reportReducer'
 const reducers =  combineReducers({
   dashboard:dashboardReducer,
   authentication:authReducer,
   summary:chartReducer,
+  report:reportReducer,
   form: reduxFormReducer
 });
 

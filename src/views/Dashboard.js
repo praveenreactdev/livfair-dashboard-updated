@@ -19,6 +19,7 @@ import {
 } from "variables/charts.js";
 import { getChartData } from "../store/actions/chartActions";
 import { connect, useStore } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class Dashboard extends React.Component {
   chartExample1 = {};
@@ -310,9 +311,12 @@ class Dashboard extends React.Component {
     });
   };
 
-
+checkAuthentication = ()=>{
+  return this.props.authentication.isAuthenticated
+}
   render() {
     return (
+      
       <>
         <div className="content">
           <Row>
@@ -425,7 +429,9 @@ class Dashboard extends React.Component {
 const mapStateToProps = (state) => ({
   dashboard: state.dashboard,
   initialValues : state.dashboard.initialValues,
-  summary: state.summary
+  summary: state.summary,
+  authentication:state.authentication
+
 });
 
 export default connect(mapStateToProps, { getChartData })(Dashboard);
