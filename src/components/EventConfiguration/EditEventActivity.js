@@ -1,8 +1,9 @@
-import React, { Fragment,useEffect } from 'react'
+import React, { Fragment,useEffect,Component } from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 import { Input, FormFeedback, FormText, Button } from 'reactstrap';
-import { editExhibitor,editEventActivity } from 'store/actions/dashboardActions';
+import { editEventActivity,createEventActivity } from 'store/actions/dashboardActions';
+import CreateEventActivity from './CreateEventActivity';
 
 const renderField = ({ input, label, type, custom, warning, meta: { touched, error } }) => (
   <div style={{ marginBottom: '4px' }}>
@@ -154,26 +155,48 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
   </ul>
 );
 
-const createEventActivity = (val) => {
+// const createEventActivity = (val) => {
+//   console.log(val)
+//   let { userEngagements } = val;
+//   if (Array.isArray(userEngagements) && userEngagements.length > 0) {
+//     userEngagements.map((ue, index) => {
+//       let { options } = ue;
+//       let tempOptions = [];
+//       if (Array.isArray(options) && options.length > 0) {
+//         options.map(opt => {
+//           tempOptions.push(opt['name'])
+//         })
+//       }
+//       userEngagements[index]['options'] = tempOptions;
+//     })
+//   }
+//   val['userEngagements'] = userEngagements
+
+
+//   console.log(val)
+
+// }
+
+const createEventActivityI = (val) => {
   console.log(val)
-  let { userEngagements } = val;
-  if (Array.isArray(userEngagements) && userEngagements.length > 0) {
-    userEngagements.map((ue, index) => {
-      let { options } = ue;
-      let tempOptions = [];
-      if (Array.isArray(options) && options.length > 0) {
-        options.map(opt => {
-          tempOptions.push(opt['name'])
-        })
-      }
-      userEngagements[index]['options'] = tempOptions;
-    })
-  }
-  val['userEngagements'] = userEngagements
-
-
-  console.log(val)
-
+  return new Promise((resolve, reject) => {
+    let { userEngagements } = val;
+    if (Array.isArray(userEngagements) && userEngagements.length > 0) {
+      userEngagements.map((ue, index) => {
+        let { options } = ue;
+        let tempOptions = [];
+        if (Array.isArray(options) && options.length > 0) {
+          options.map(opt => {
+            tempOptions.push(opt['name'])
+          })
+        }
+        userEngagements[index]['options'] = tempOptions;
+      })
+    }
+    val['userEngagements'] = userEngagements
+    console.log(val)
+    resolve(val)
+  })
 }
 
 const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
@@ -184,16 +207,20 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
     </Input>
   </div>
 );
+
+
+
 const EditEventActivity = props => {
-  const { handleSubmit, pristine, reset, submitting, match: { params },editEventActivity } = props
+  const { handleSubmit, pristine, reset, submitting, match: { params },editEventActivity,dashboard,createEventActivity,history } = props
   console.log('initial values ',props.initialValues)
   useEffect(() => {
     console.log(params.eventActivityId)
-      editEventActivity({name:params.eventActivityId})
+    console.log('192 edit event activity',dashboard)
+      editEventActivity({name:params.eventActivityId,activities:dashboard.eventActivities})
   },[])
   return (
     <div className="content">
-      <form onSubmit={handleSubmit(val => createEventActivity(val))}>
+      <form onSubmit={handleSubmit(val => createEventActivityI(val).then(v=>{createEventActivity({ data: v, history })}))}>
         <Field
           name="name"
           type="text"
@@ -242,7 +269,14 @@ const EditEventActivity = props => {
           component={renderField}
           label="Description"
         />
-
+      <div style={{ marginBottom: "4px" }}>
+          <div >
+            <Field label="Status" name='isActive' component={renderSelectField} style={{ width: '100%', borderRadius: '4px', border: '0.5px solid grey', height: '40px' }}>
+              <option value="Y" style={{ color: 'black' }}>Active</option>
+              <option value="N" style={{ color: 'black' }}>Inactive</option>
+            </Field>
+          </div>
+        </div>
 
         <FieldArray name="userEngagements" component={renderEngagement} />
 
@@ -275,4 +309,4 @@ const eventActivityForm = reduxForm({
   enableReinitialize: true
 })(EditEventActivity)
 
-export default connect(mapStateToProps,{editEventActivity})(eventActivityForm)
+export default connect(mapStateToProps,{editEventActivity,createEventActivity})(eventActivityForm)

@@ -34,6 +34,10 @@ export default function (state = getInitialState(), action) {
           ...state,events:action.payload
         };
       }
+
+      case 'LOG_OUT':{
+        return {...state,isAuthenticated:false}
+      }
         
       default:
         return state;

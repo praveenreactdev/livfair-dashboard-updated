@@ -3,20 +3,19 @@ import { Field, FieldArray, reduxForm } from 'redux-form'
 import { connect } from "react-redux";
 import { Input, FormFeedback, FormText, Button } from 'reactstrap';
 import { createEventActivity } from '../../store/actions/dashboardActions'
-const renderField = ({ input, label, type, custom, warning, meta: { touched, error } }) => (
-  <div style={{ marginBottom: '4px' }}>
-    <label>{label}</label>
-    {/* <div>
-        <input {...input} type={type} placeholder={label} style={{width:'100%',borderRadius:'4px',border:'0.5px solid grey',height:'40px'}} />
-        {touched && error && <span>{error}</span>}         
-      </div> */}
-    <Fragment>
-      <Input {...(touched ? { valid: !error } : {})} {...input} {...custom} />
-      {error && <FormFeedback>{error}</FormFeedback>}
-      {!error && warning && <FormText>{warning}</FormText>}
-    </Fragment>
-  </div>
-);
+const renderField = ({ input, label, type, custom, warning, meta: { touched, error } }) => {
+
+  return (
+    <div style={{ marginBottom: '4px' }}>
+      <label>{label}</label>
+      <Fragment>
+        <Input {...(touched ? { valid: !error } : {})} {...input} {...custom} />
+        {error && <FormFeedback>{error}</FormFeedback>}
+        {!error && warning && <FormText>{warning}</FormText>}
+      </Fragment>
+    </div>
+  )
+};
 
 const renderEngagement = ({ fields, meta: { touched, error, submitFailed } }) => (
   <ul style={{ listStyle: 'none' }}>
@@ -187,11 +186,11 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
   </div>
 );
 const CreateEventActivity = props => {
-  const { handleSubmit, pristine, reset, submitting, createEventActivity,history,match:{params} } = props
+  const { handleSubmit, pristine, reset, submitting, createEventActivity, history, match: { params } } = props
   return (
     <div className="content">
       <form onSubmit={handleSubmit(val => createEventActivityI(val).then(v => {
-        createEventActivity({data:v,history});
+        createEventActivity({ data: v, history });
       }))}>
         <Field
           name="name"
@@ -215,17 +214,17 @@ const CreateEventActivity = props => {
         <div style={{ marginBottom: "4px" }}>
           <div >
             <Field label="Venue" name='hall' component={renderSelectField} style={{ width: '100%', borderRadius: '4px', border: '0.5px solid grey', height: '40px' }}>
-              <option value="Choose" style={{color:'black'}}>Choose</option>
-              <option value="HALL4" style={{color:'black'}}>HALL 4</option>
-              <option value="AUDITORIUM" style={{color:'black'}}>AUDITORIUM</option>
+              <option value="Choose" style={{ color: 'black' }}>Choose</option>
+              <option value="HALL4" style={{ color: 'black' }}>HALL 4</option>
+              <option value="AUDITORIUM" style={{ color: 'black' }}>AUDITORIUM</option>
             </Field>
           </div>
         </div>
         <div style={{ marginBottom: "4px" }}>
           <div >
             <Field label="Type" name='type' component={renderSelectField} style={{ width: '100%', borderRadius: '4px', border: '0.5px solid grey', height: '40px' }}>
-              <option value="Choose" style={{color:'black'}}>Choose</option>
-              <option value="RECORDED_VIDEO" style={{color:'black'}}>RECORDED_VIDEO</option>
+              <option value="Choose" style={{ color: 'black' }}>Choose</option>
+              <option value="RECORDED_VIDEO" style={{ color: 'black' }}>RECORDED_VIDEO</option>
             </Field>
           </div>
         </div>
@@ -241,7 +240,14 @@ const CreateEventActivity = props => {
           component={renderField}
           label="Description"
         />
-
+        <div style={{ marginBottom: "4px" }}>
+          <div >
+            <Field label="Status" name='isActive' component={renderSelectField} style={{ width: '100%', borderRadius: '4px', border: '0.5px solid grey', height: '40px' }}>
+              <option value="Y" style={{ color: 'black' }}>Active</option>
+              <option value="N" style={{ color: 'black' }}>Inactive</option>
+            </Field>
+          </div>
+        </div>
 
         <FieldArray name="userEngagements" component={renderEngagement} />
 

@@ -84,7 +84,7 @@ class ExhibitorsList extends Component {
                                   color="success"
                                   id="tooltip932549650"
                                   size="sm"
-                                  onClick={e => { this.props.history.push('/admin/edit-exhibitor/' + exhibitor.exhibitorId) }}
+                                  onClick={e => { this.props.history.push('/admin/edit-exhibitor/' + exhibitor._id) }}
                                 >
                                   <i className="tim-icons icon-pencil" />
                                 </Button>

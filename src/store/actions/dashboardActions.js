@@ -14,8 +14,8 @@ const config = {
   getChatData: '/v1/chatData',
   getMetaDataURL: "/init/getMetaData",
   websocketRootPath: process.env.REACT_APP_WEBSOCKET_ROOT_PATH || "ws://localhost:8000/",
-  //eventConfigurationBaseURL:'https://event-manager.livfair.com/',
-  eventConfigurationBaseURL: 'http://localhost:4100/',
+  eventConfigurationBaseURL:'https://event-manager.livfair.com/',
+  //eventConfigurationBaseURL: 'http://localhost:4100/',
   websocketURL: "ws://localhost:8000/api/ws/notification",
   changePasswordURL: "/v1/updatePassword",
   updateUserURL: "/v1/updateUser/",
@@ -204,6 +204,7 @@ export const getEventActivities = (eventId) => (dispatch) => {
 
 export const editEventActivity = (eventActivityId) => (dispatch) => {
   console.log('198', eventActivityId)
+
   dispatch({
     type: 'EDIT_EVENT_ACTIVITY',
     payload: eventActivityId
@@ -222,7 +223,7 @@ export const createEventActivity = (val) =>
       dispatch({
         type:'EVENT_ACTIVITY'
       })
-      dispatch(getEventActivities(eventId))
+     // dispatch(getEventActivities(eventId))
       history.goBack()
     })
   }

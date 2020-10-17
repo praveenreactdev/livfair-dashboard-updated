@@ -31,12 +31,13 @@ export default function (state = initialState, action) {
     }
     case 'EDIT_EVENT_ACTIVITY': {
       let { name } = action.payload;
-      let { eventActivities } = state;
+      let eventActivities = action.payload.activities;
+      console.log('35 dashboard reducer',eventActivities)
       console.log(eventActivities)
       console.log('36 dashboard reducer ',name)
       if (eventActivities.length > 0) {
         console.log('38 dashboard reducer',eventActivities)
-        let ex = eventActivities.filter(x => x._id = name)[0];
+        let ex = eventActivities.filter(x => x._id == name)[0];
         console.log(ex)
         let { userEngagements } = ex;
         if (Array.isArray(userEngagements) && userEngagements.length > 0) {
@@ -68,8 +69,8 @@ export default function (state = initialState, action) {
       console.log(exhibitorId)
       if (exhibitors.length > 0) {
         console.log('inside > 0')
-        let ex = exhibitors.filter(x => x.exhibitorId = exhibitorId)[0]
-        delete ex['_id']
+        let ex = exhibitors.filter(x => x._id == exhibitorId)[0]
+        //delete ex['_id']
         return { ...state, initialValues: ex }
       } else {
         return { ...state }

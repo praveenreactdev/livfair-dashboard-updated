@@ -156,7 +156,14 @@ const renderBooths = ({ fields, meta: { touched, error, submitFailed } }) => (
     ))}
   </ul>
 );
-
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+  <div>
+    <label>{label}</label>
+    <Input type="select" {...(touched ? { valid: !error } : {})} {...input} {...custom}>
+      {children}
+    </Input>
+  </div>
+);
 const EditExhibitor = props => {
   const { handleSubmit, pristine, reset, submitting, match: { params }, editExhibitor, dashboard, updateExhibitor } = props
   console.log(props)
@@ -164,7 +171,7 @@ const EditExhibitor = props => {
   useEffect(() => {
     console.log(params.exhibitorId)
     editExhibitor({ exhibitorId: params.exhibitorId })
-  })
+  },[])
 
   return (
     <div className="content">
@@ -254,6 +261,14 @@ const EditExhibitor = props => {
           component={renderField}
           label="Zipcode"
         />
+        <div style={{ marginBottom: "4px" }}>
+          <div >
+            <Field label="Status" name='isActive' component={renderSelectField} style={{ width: '100%', borderRadius: '4px', border: '0.5px solid grey', height: '40px' }}>
+              <option value="Y" style={{ color: 'black' }}>Active</option>
+              <option value="N" style={{ color: 'black' }}>Inactive</option>
+            </Field>
+          </div>
+        </div>
         <FieldArray name="metadata.media" component={renderMedia} />
         <FieldArray name="booths" component={renderBooths} />
         <div>
