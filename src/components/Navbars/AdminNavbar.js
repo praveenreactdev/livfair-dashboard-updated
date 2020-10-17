@@ -200,7 +200,7 @@ class AdminNavbar extends React.Component {
                       <DropdownItem className="nav-item">Profile</DropdownItem>
                     </NavLink>
                     <NavLink tag="li">
-                      <DropdownItem className="nav-item" onClick={()=>{this.props.logout();this.props.history.push("/")}}>Log out</DropdownItem>
+                      <DropdownItem className="nav-item" onClick={()=>{this.props.logout();this.props.history.push("/auth/login")}}>Log out</DropdownItem>
                     </NavLink>
                   </DropdownMenu>
                 </UncontrolledDropdown>
